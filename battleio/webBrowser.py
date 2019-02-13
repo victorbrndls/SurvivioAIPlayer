@@ -16,9 +16,9 @@ class GameWebBrowser():
 
     def loadGame(self):
         if settings.driver is None:
-            self.createDriver()
+            self._createDriver()
         
         settings.driver.get(GAME_URL)        
         
-    def createDriver(self):
-        settings.driver = webdriver.Firefox(executable_path="D:\\Workspace\\Apps\\DataCrawler\\geckodriver.exe"
+    def _createDriver(self):
+        settings.driver = webdriver.Firefox(executable_path="D:\\Workspace\\Apps\\DataCrawler\\geckodriver.exe")
