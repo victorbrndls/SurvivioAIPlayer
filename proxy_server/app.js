@@ -23174,6 +23174,7 @@ webpackJsonp([1], {
         r.prototype = {
             B: function (e, t, a, i) {
                 var r = this;
+				window.rObj = r;
                 if (!(this.connecting || this.connected || this.initialized)) {
                     console.log("Joining", t), this.ws && (this.ws.onerror = function () {
                     }, this.ws.onopen = function () {
@@ -23510,7 +23511,7 @@ webpackJsonp([1], {
                         var L = new h.PickupMsg;
                         if (L.deserialize(t), L.type == h.PickupMsgType.Success && L.item) {
                             var R = n.items[L.item];
-							window.myLog(R);
+						
                             this.we.playSound(R.sound.pickup, {channel: "ui"}), "throwable" == R.type && (this.ut.lastThrowablePickupSfxTicker = .3)
                         } else this.tt.displayPickupMessage(L.type);
                         break;

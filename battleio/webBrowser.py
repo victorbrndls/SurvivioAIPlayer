@@ -3,7 +3,7 @@ from selenium import webdriver
 from battleio import settings
 from enum import Enum
 
-GAME_URL = "https://surviv.io/"
+GAME_URL = "http://localhost:1111/"
 
 # The moduleRaid is a script used to unpack modules from webpackJsonp
 # https://github.com/pixeldesu/moduleRaid
@@ -69,3 +69,5 @@ class GameWebBrowser():
         print("Starting the game [{0}]".format(mode))
         settings.driver.find_element_by_css_selector("#" + mode.value).click()
     
+    def getPlayerX(self):
+        return settings.driver.execute_script("rObj.K.pos.x");
