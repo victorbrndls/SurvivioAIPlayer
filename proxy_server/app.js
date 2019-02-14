@@ -23191,6 +23191,7 @@ webpackJsonp([1], {
                             for (var t = new h.MsgStream(e.data); ;) {
                                 var a = t.deserializeMsgType();
                                 if (a == h.Msg.None) break;
+
                                 r.Se(a, t.getStream())
                             }
                         }, this.ws.onclose = function () {
@@ -23509,6 +23510,7 @@ webpackJsonp([1], {
                         var L = new h.PickupMsg;
                         if (L.deserialize(t), L.type == h.PickupMsgType.Success && L.item) {
                             var R = n.items[L.item];
+							window.myLog(R);
                             this.we.playSound(R.sound.pickup, {channel: "ui"}), "throwable" == R.type && (this.ut.lastThrowablePickupSfxTicker = .3)
                         } else this.tt.displayPickupMessage(L.type);
                         break;
@@ -33560,7 +33562,7 @@ webpackJsonp([1], {
         }
 
         function r() {
-            console.log = i, console.log("Init system logger")
+            //console.log = i, console.log("Init system logger")
         }
 
         var o = "[dev]", n = void 0 !== function (e, t) {
@@ -50405,3 +50407,7 @@ webpackJsonp([1], {
     }
 }, ["c99e6613"]);
 //# sourceMappingURL=app.8c9b4367.js.map
+
+function myLog(str){
+		console.log(str);
+}

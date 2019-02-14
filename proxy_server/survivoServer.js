@@ -1,7 +1,6 @@
 const http = require('http');
 const https = require('https');
 const fs = require('fs');
-const qs = require('querystring');
 
 const DEBUG = true;
 
@@ -16,10 +15,9 @@ let server = http.createServer((req, res) => {
             switch (req.url) {
                 case '/js/app.8c9b4367.js':
                     console.log("JAVA SCRIPT");
-                    fs.createReadStream('t.js').pipe(res);
+                    fs.createReadStream('app.js').pipe(res);
                     break;
                 default:
-                    // 'Cookie': req.headers.cookie, 'Referer': "https://surviv.io/"
                     var headers = req.headers;
                     headers.host = 'surviv.io';
                     headers.referer = "https://surviv.io/";

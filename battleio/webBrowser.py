@@ -14,6 +14,7 @@ moduleRaidScript = '''
     document.querySelector('head').append(raidScript);
 '''
 
+
 class GameMode(Enum):
     '''
     PLAY_MODE-NAME = 'id of the button that is clicked to start the game in the 
@@ -22,6 +23,7 @@ class GameMode(Enum):
     PLAY_SOLO = 'btn-start-solo'
     PLAY_DUO = 'btn-start-duo'
     PLAY_SQUAD = 'btn-start-squad'
+
 
 class GameWebBrowser():
     '''
@@ -32,8 +34,6 @@ class GameWebBrowser():
     
     def __init__(self):
         pass
-
-
     
     def loadGame(self):
         if settings.driver is None:
