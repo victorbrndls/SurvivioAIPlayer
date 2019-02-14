@@ -5,6 +5,14 @@ from enum import Enum
 
 GAME_URL = "https://surviv.io/"
 
+# The moduleRaid is a script used to unpack modules from webpackJsonp
+# https://github.com/pixeldesu/moduleRaid
+moduleRaidScript = '''
+    var raidScript = document.createElement('script');
+    raidScript.type= 'text/javascript';
+    raidScript.src = 'https://unpkg.com/moduleraid@4.0.1/moduleraid.js';
+    document.querySelector('head').append(raidScript);
+'''
 
 class GameMode(Enum):
     '''
@@ -14,7 +22,6 @@ class GameMode(Enum):
     PLAY_SOLO = 'btn-start-solo'
     PLAY_DUO = 'btn-start-duo'
     PLAY_SQUAD = 'btn-start-squad'
-
 
 class GameWebBrowser():
     '''
@@ -26,16 +33,24 @@ class GameWebBrowser():
     def __init__(self):
         pass
 
+
+    
     def loadGame(self):
         if settings.driver is None:
             self._createDriver()
         
         print("Loading the game")
-        settings.driver.get(GAME_URL)        
+        settings.driver.get(GAME_URL)
+        self.injectRaidModuleScript()
         
     def _createDriver(self):
         print("Creating the WebDriver")
         settings.driver = webdriver.Firefox(executable_path="D:\\Workspace\\Apps\\DataCrawler\\geckodriver.exe")
+
+    def injectRaidModuleScript(self):
+        "Injects the moduleRaid script into the page"
+        print("Inject moduleRaid script")
+        settings.driver.execute_script(moduleRaidScript)
 
     def changeServer(self, server):
         '''
