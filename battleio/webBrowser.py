@@ -7,6 +7,10 @@ GAME_URL = "https://surviv.io/"
 
 
 class GameMode(Enum):
+    '''
+    PLAY_MODE-NAME = 'id of the button that is clicked to start the game in the 
+    respective mode'
+    '''
     PLAY_SOLO = 'btn-start-solo'
     PLAY_DUO = 'btn-start-duo'
     PLAY_SQUAD = 'btn-start-squad'
@@ -49,8 +53,4 @@ class GameWebBrowser():
         '''
         print("Starting the game [{0}]".format(mode))
         settings.driver.find_element_by_css_selector("#" + mode.value).click()
-
-    
-    
-    
     
