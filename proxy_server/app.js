@@ -50414,10 +50414,13 @@ function myLog(str){
 }
 
 function hasGameInitialized(){
-    console.log("callign this func");
     return rObj !== undefined;
 }
 
 function getPlayerX(){
     return rObj.K.pos.x;
+}
+
+function getPlayerY(){
+    return rObj.K.pos.y;
 }

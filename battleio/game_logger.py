@@ -1,5 +1,6 @@
 import threading
 import time
+from selenium.common.exceptions import WebDriverException
 
 
 class GameLogger(threading.Thread):
@@ -12,8 +13,12 @@ class GameLogger(threading.Thread):
         self.waitForGameToStart()
         
         while(self.isAlive()):
-            print(self.webBrowser.getPlayerX())
-            time.sleep(1)
+            try:
+                print("X: {0}, Y: {1}".format(self.webBrowser.getPlayerX(), self.webBrowser.getPlayerY()))
+                time.sleep(1)
+            except WebDriverException:  # If the browser is closed this exception is thrown
+                print("Closing GameLogger")
+                break;
     
     def waitForGameToStart(self):
         '''

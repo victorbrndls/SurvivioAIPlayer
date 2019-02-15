@@ -87,4 +87,7 @@ class GameWebBrowser():
             return None
     
     def getPlayerX(self):
-        return settings.driver.execute_script("return getPlayerX()");
+        return settings.driver.execute_script("return getPlayerX();");
+    
+    def getPlayerY(self):
+        return settings.driver.execute_script("return getPlayerY();");
