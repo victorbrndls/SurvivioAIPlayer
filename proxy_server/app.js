@@ -23107,7 +23107,7 @@ webpackJsonp([1], {
                 }
             },
             scopeZoomRadius: {
-                desktop: {"1xscope": 28, "2xscope": 36, "4xscope": 48, "8xscope": 68, "15xscope": 104},
+                desktop: {"1xscope": 51, "2xscope": 36, "4xscope": 48, "8xscope": 68, "15xscope": 104},
                 mobile: {"1xscope": 32, "2xscope": 40, "4xscope": 48, "8xscope": 64, "15xscope": 88}
             },
             bagSizes: {
@@ -23147,6 +23147,7 @@ webpackJsonp([1], {
                 scope: 1
             }
         }
+        window.itemConfigs = e;
     }, "9b5f96fd": function (e, t, a) {
         "use strict";
 
@@ -47685,6 +47686,7 @@ webpackJsonp([1], {
             }, flushInput: function () {
                 this.uiEvents = []
             }, l: function (e, t, a, i, r, o, n) {
+                //window.newState = this.newState;
                 var s = this.newState;
                 if (s.mobile = M.mobile, s.touch = M.touch, s.touch) for (var m = 0; m < this.itemActions.length; m++) {
                     var p = this.itemActions[m];
@@ -47693,6 +47695,11 @@ webpackJsonp([1], {
                         h >= A && (this.pushAction(p), p.actionTime = d)
                     }
                 }
+                
+                s.scopes[4].visible = 1;
+                s.scopes[4].equipped = 1;
+                s.scopes[4].selectable = 1;
+                
                 s.pickupMessage.ticker += e;
                 var u = s.pickupMessage.ticker, g = s.pickupMessage.duration;
                 s.pickupMessage.opacity = S.smoothstep(u, 0, .2) * (1 - S.smoothstep(u, g, g + .2));
@@ -47752,8 +47759,14 @@ webpackJsonp([1], {
                 s.ammo.current = ce, s.ammo.remaining = me, s.ammo.displayCurrent = "melee" != le.type, s.ammo.displayRemaining = me > 0;
                 for (var pe = 0; pe < s.scopes.length; pe++) {
                     var de = s.scopes[pe];
-                    de.visible = t.Y.inventory[de.type] > 0, de.equipped = de.visible && t.Y.curScope == de.type, de.selectable = de.visible && !a
+                    //de.visible = t.Y.inventory[de.type] > 0, de.equipped = de.visible && t.Y.curScope == de.type, de.selectable = de.visible && !a
+                    de.visible = 1, de.equipped = 0, de.selectable = 1
                 }
+                
+                s.scopes[4].visible = 1;
+                s.scopes[4].equipped = 1;
+                s.scopes[4].selectable = 1;
+                                         
                 for (var he = t.Nt(), ue = 0; ue < s.loot.length; ue++) {
                     var ge = s.loot[ue], ye = ge.count;
                     ge.count = t.Y.inventory[ge.type] || 0, ge.maximum = x.bagSizes[ge.type][he], ge.selectable = ge.count > 0 && !a, ge.count > ye && (ge.ticker = 0), this.frameCount < 2 && (ge.ticker = 1), ge.ticker += e;
@@ -49244,7 +49257,7 @@ webpackJsonp([1], {
         "use strict";
 
         function i(e) {
-            this.config = e, this.config.addModifiedListener(this.onConfigModified.bind(this)), this.enabled = !1, this.wasEnabled = !1, this.zoom = n.scopeZoomRadius.desktop["1xscope"], this.loadNewMap = !1, this.mapSeed = 0, this.setEnabled(!1)
+            this.config = e, this.config.addModifiedListener(this.onConfigModified.bind(this)), this.enabled = !1, this.wasEnabled = !1, this.zoom = n.scopeZoomRadius.desktop["15xscope"], this.loadNewMap = !1, this.mapSeed = 0, this.setEnabled(!1)
         }
 
         var r = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (e) {
@@ -50424,3 +50437,5 @@ function getPlayerX(){
 function getPlayerY(){
     return rObj.K.pos.y;
 }
+
+window.desktopZoom = itemConfigs.exports.scopeZoomRadius.desktop;
