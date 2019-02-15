@@ -50412,3 +50412,12 @@ webpackJsonp([1], {
 function myLog(str){
 		console.log(str);
 }
+
+function hasGameInitialized(){
+    console.log("callign this func");
+    return rObj !== undefined;
+}
+
+function getPlayerX(){
+    return rObj.K.pos.x;
+}

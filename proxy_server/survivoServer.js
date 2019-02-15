@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const DEBUG = true;
 
-const WEBSITE = 'www.surviv.io';
+const WEBSITE = 'surviv.io';
 
 let server = http.createServer((req, res) => {
     if (DEBUG)
@@ -14,14 +14,11 @@ let server = http.createServer((req, res) => {
         case 'GET':
             switch (req.url) {
                 case '/js/app.8c9b4367.js':
-                    console.log("JAVA SCRIPT");
                     fs.createReadStream('app.js').pipe(res);
                     break;
                 default:
-                    var headers = req.headers;
-                    headers.host = 'surviv.io';
-                    headers.referer = "https://surviv.io/";
-                    headers['accept-encoding'] = "";
+                    let headers = modifyHeaders(req.headers);
+
                     makeHttpsRequest(WEBSITE, req.url, headers, (data) => {
                         res.write(data);
                         res.end();
@@ -33,14 +30,11 @@ let server = http.createServer((req, res) => {
             let buffers = [];
 
             req.on('data', (data)=>{
-                buffers.push(data);
+                buffers.push(data); // Read body data
             });
 
             req.on('end', () => {
-                var headers = req.headers;
-                headers.host = 'surviv.io';
-                headers.referer = "https://surviv.io/";
-                headers['accept-encoding'] = "";
+                let headers = modifyHeaders(req.headers);
 
                 makePOSTRequest(WEBSITE, req.url, headers, Buffer.concat(buffers).toString('utf8'), (data, headers)=>{
                     res.writeHead(200, headers);
@@ -48,7 +42,6 @@ let server = http.createServer((req, res) => {
                     res.end();
                 });
             });
-
             break;
     }
 
@@ -57,6 +50,13 @@ let server = http.createServer((req, res) => {
 server.listen(1111, () => {
     console.log("Listening on 1111");
 });
+
+function modifyHeaders(headers) {
+    headers.host = 'surviv.io';
+    headers.referer = "https://surviv.io/";
+    headers['accept-encoding'] = "";
+    return headers;
+}
 
 function makeHttpsRequest(host, path, headers = {}, cb) {
     let req = https.request({
